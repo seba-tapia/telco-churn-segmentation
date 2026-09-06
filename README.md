@@ -2,6 +2,14 @@
 
 End-to-end project that identifies **which telecom customers are most at risk of leaving (churn)**, groups them into **actionable segments**, and exposes that information through an **API** and an **interactive dashboard**.
 
+**Author:** Sebastian Tapia
+
+*(This README is also available in Spanish: [README.es.md](README.es.md))*
+
+---
+
+> **Note:** my professional background is in banks and insurance companies, environments that handle highly confidential information that cannot be shared or used outside those contexts. For that reason, this portfolio project is built entirely on a public dataset (Kaggle), with no data or information coming from my professional activity.
+
 ---
 
 ## 📌 Business Summary (no technical background required)
