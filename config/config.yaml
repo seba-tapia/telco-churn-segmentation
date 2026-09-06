@@ -1,0 +1,158 @@
+# ============================================================
+# GENERAL PROJECT CONFIGURATION
+# ============================================================
+
+project:
+  name: "Telco Churn Segmentation & Prediction"
+  version: "1.0.0"
+  author: "Sebastian Tapia"
+
+# ============================================================
+# FILE PATHS
+# ============================================================
+
+paths:
+  raw_data: "data/raw/Telco-Customer-Churn.csv"
+  clean_data: "data/processed/clean_telco.csv"
+  features_data: "data/processed/features_telco.csv"
+  segments_data: "data/processed/segments_telco.csv"
+  funnel_data: "data/processed/funnel_telco.csv"
+  predictions_data: "data/processed/churn_predictions.csv"
+  model_artifact: "models/churn_model.joblib"
+  metrics_report: "models/metrics_report.json"
+
+# ============================================================
+# CLEANING CONFIGURATION
+# ============================================================
+
+cleaning:
+  numeric_columns:
+    - MonthlyCharge
+    - TotalCharges
+    - TotalRefunds
+    - TotalExtraDataCharges
+    - TotalLongDistanceCharges
+    - TotalRevenue
+    - CLTV
+    - ChurnScore
+    - SatisfactionScore
+    - TenureinMonths
+    - AvgMonthlyGBDownload
+    - AvgMonthlyLongDistanceCharges
+
+  drop_columns:
+    - CustomerID
+    - Country
+    - State
+    - City
+    - ZipCode
+    - Latitude
+    - Longitude
+    - Population
+    - Quarter
+
+# ============================================================
+# FEATURE ENGINEERING
+# ============================================================
+
+features:
+  binary_columns:
+    - PhoneService
+    - MultipleLines
+    - OnlineSecurity
+    - OnlineBackup
+    - DeviceProtectionPlan
+    - PremiumTechSupport
+    - StreamingTV
+    - StreamingMovies
+    - StreamingMusic
+    - UnlimitedData
+    - PaperlessBilling
+
+  service_columns:
+    - PhoneService
+    - MultipleLines
+    - InternetService
+    - InternetType
+    - OnlineSecurity
+    - OnlineBackup
+    - DeviceProtectionPlan
+    - PremiumTechSupport
+    - StreamingTV
+    - StreamingMovies
+    - StreamingMusic
+    - UnlimitedData
+
+  engagement_columns:
+    - OnlineSecurity
+    - OnlineBackup
+    - DeviceProtectionPlan
+    - PremiumTechSupport
+
+# ============================================================
+# SEGMENTATION (CLUSTERING)
+# ============================================================
+
+clustering:
+  k: 4
+  cluster_columns:
+    - TenureinMonths
+    - MonthlyCharge
+    - TotalCharges
+    - TotalRevenue
+    - TotalServices
+    - EngagementScore
+    - BillingRiskScore
+    - CLTV_Normalized
+
+# ============================================================
+# CHURN MODELING
+# ============================================================
+
+modeling:
+  target: "ChurnLabel"
+  # Threshold recommended in the conclusions of 06_Churn_Model.ipynb.
+  # Saved in the exported artifact, but not yet read or applied in
+  # main.py/dashboard.py: predict_proba is used raw there for now.
+  decision_threshold: 0.35
+
+  feature_columns:
+    - TenureinMonths
+    - MonthlyCharge
+    - TotalCharges
+    - TotalRevenue
+    - TotalServices
+    - EngagementScore
+    - BillingRiskScore
+    - CLTV_Normalized
+    - Cluster
+
+  test_size: 0.25
+  random_state: 42
+
+  algorithms:
+    logistic_regression:
+      max_iter: 1000
+
+    random_forest:
+      n_estimators: 300
+      max_depth: 10
+      random_state: 42
+
+    xgboost:
+      n_estimators: 300
+      learning_rate: 0.05
+      max_depth: 6
+      subsample: 0.8
+      colsample_bytree: 0.8
+      random_state: 42
+
+# ============================================================
+# EXPORT
+# ============================================================
+
+export:
+  save_clean: true
+  save_features: true
+  save_segments: true
+  save_predictions: true
