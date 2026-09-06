@@ -2,6 +2,14 @@
 
 Proyecto end-to-end que identifica **qué clientes de una empresa de telecomunicaciones tienen mayor riesgo de irse (churn)**, los agrupa en **segmentos accionables**, y expone esa información a través de una **API** y un **dashboard interactivo**.
 
+**Autor:** Sebastian Tapia
+
+*(Este README también está disponible en inglés: [README.md](README.md))*
+
+---
+
+> **Nota:** mi experiencia laboral ha sido en bancos y aseguradoras, entornos donde se maneja información altamente confidencial que no puede compartirse ni usarse fuera de esos contextos. Por eso este proyecto de portafolio está construido íntegramente sobre un dataset público (Kaggle), sin ningún dato ni información proveniente de mi actividad profesional.
+
 ---
 
 ## 📌 Resumen para negocio (sin conocimientos técnicos)
